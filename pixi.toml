@@ -1,0 +1,8 @@
+[workspace]
+name = "awdrop-dev"
+channels = ["conda-forge"]
+platforms = ["win-64"]
+
+[dependencies]
+rust = "1.99.1.*"
+m2w64-gcc = "15.*"

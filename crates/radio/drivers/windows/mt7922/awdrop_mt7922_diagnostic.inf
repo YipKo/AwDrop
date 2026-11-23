@@ -1,0 +1,53 @@
+; SPDX-License-Identifier: BSD-3-Clause-Clear
+; Experimental, unsigned package for the locally identified RZ616 board only.
+; Not a network driver. Do not stage or install as a production replacement.
+[Version]
+Signature="$WINDOWS NT$"
+Class=System
+ClassGuid={4d36e97d-e325-11ce-bfc1-08002be10318}
+Provider=%Provider%
+DriverVer=11/23/2026,0.0.1.0
+CatalogFile=awdrop_mt7922_diagnostic.cat
+PnpLockdown=1
+
+[Manufacturer]
+%Provider%=Devices,NTamd64.10.0...26100
+
+[Devices.NTamd64.10.0...26100]
+%Description%=Install,PCI\VEN_14C3&DEV_0616&SUBSYS_E0CD105B&REV_00
+
+[DestinationDirs]
+DriverFiles=13
+
+[SourceDisksNames]
+1=%Disk%,,,
+
+[SourceDisksFiles]
+awdrop_mt7922_diagnostic.sys=1
+
+[Install.NT]
+CopyFiles=DriverFiles
+
+[DriverFiles]
+awdrop_mt7922_diagnostic.sys
+
+[Install.NT.Services]
+AddService=AwDropMT7922Diag,0x00000002,Service
+
+[Service]
+DisplayName=%Description%
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%13%\awdrop_mt7922_diagnostic.sys
+
+[Install.NT.Wdf]
+KmdfService=AwDropMT7922Diag,Wdf
+
+[Wdf]
+KmdfLibraryVersion=1.33
+
+[Strings]
+Provider="AwDrop project"
+Description="AwDrop MT7922 diagnostic (experimental, no Wi-Fi)"
+Disk="AwDrop MT7922 diagnostic package"

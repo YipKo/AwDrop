@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+  <title id="title">AwDrop</title>
+  <defs>
+    <linearGradient id="plate" x2="100%" y2="100%">
+      <stop stop-color="#fffcf6"/>
+      <stop offset=".5" stop-color="#f3e9de"/>
+      <stop offset="1" stop-color="#dac9ba"/>
+    </linearGradient>
+    <linearGradient id="back" x2="0" y2="100%">
+      <stop stop-color="#ffbc73"/>
+      <stop offset="1" stop-color="#cf5930"/>
+    </linearGradient>
+    <linearGradient id="front" x2="0" y2="100%">
+      <stop stop-color="#ec7843"/>
+      <stop offset="1" stop-color="#ae3720"/>
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" width="240" height="240" rx="58" fill="url(#plate)" stroke="#d4c2b2" stroke-width="1.5"/>
+  <g transform="rotate(-10 128 128)">
+    <rect x="49" y="68" width="116" height="81" rx="20" fill="url(#back)"
+          stroke="#fff7df" stroke-opacity=".306" stroke-width="1.5"/>
+    <path d="M70 105 Q82 82 107 82 M82 111 Q90 94 107 95"
+          fill="none" stroke="#fff4de" stroke-linecap="round" stroke-width="6"/>
+    <rect x="88" y="107" width="119" height="84" rx="21" fill="#752c15" fill-opacity=".141"/>
+    <rect x="88" y="104" width="119" height="84" rx="21" fill="url(#front)"
+          stroke="#ffcfa9" stroke-opacity=".314" stroke-width="1.5"/>
+    <path fill="#fff" d="M122 139 H150 L144 132 Q140 127 145 123 Q150 119 154 124 L171 141
+      Q176 146 171 151 L154 168 Q150 173 145 169 Q140 165 144 160
+      L150 153 H122 Q115 153 115 146 Q115 139 122 139 Z"/>
+  </g>
+</svg>

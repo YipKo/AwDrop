@@ -32,62 +32,71 @@ public static class TitleBar
     private static extern int DwmSetWindowAttribute(IntPtr window, int attribute, ref int value, int size);
 }
 
-/// <summary>The app's mark: a file that has just landed, turned as the files in
-/// the window are, and the rings spreading from where it fell. One drawing
-/// gives the icon file and the single-color mark of the notification area.
-/// See app/DESIGN.md.</summary>
+/// <summary>Two cards show a nearby transfer, with radio waves on the sending card.</summary>
 public static class AppIcon
 {
-    /// <summary>The blue Windows ships as its accent. The icon keeps it whatever
-    /// the accent is, so that it is the same icon wherever it is pinned.</summary>
-    public static readonly Color Ground = Color.FromRgb(0x00, 0x78, 0xD4);
+    public static readonly Color Ground = Color.FromRgb(0xF3, 0xE9, 0xDE);
 
     private const double Grid = 256;
-    private const double Turn = -12;
-    /// <summary>A ring fades and thins as it spreads.</summary>
-    private static readonly double[] Fade = [1, 0.7, 0.4];
-    private static readonly double[] Thin = [1, 0.88, 0.76];
+    private static readonly Geometry Plate = new RectangleGeometry(new Rect(8, 8, 240, 240), 58, 58);
+    private static readonly Geometry BackCard = new RectangleGeometry(new Rect(49, 68, 116, 81), 20, 20);
+    private static readonly Geometry FrontCard = new RectangleGeometry(new Rect(88, 104, 119, 84), 21, 21);
+    private static readonly Geometry OuterWave = Geometry.Parse("M70,105 Q82,82 107,82");
+    private static readonly Geometry InnerWave = Geometry.Parse("M82,111 Q90,94 107,95");
+    private static readonly Geometry Transfer = Geometry.Parse(
+        "M122,139 H150 L144,132 Q140,127 145,123 Q150,119 154,124 L171,141 " +
+        "Q176,146 171,151 L154,168 Q150,173 145,169 Q140,165 144,160 " +
+        "L150,153 H122 Q115,153 115,146 Q115,139 122,139 Z");
+    private static readonly Geometry TrayMark = new CombinedGeometry(GeometryCombineMode.Exclude,
+        new CombinedGeometry(GeometryCombineMode.Union, BackCard, FrontCard), Transfer);
 
-    private readonly record struct Cut(double Tile, double Stroke, double[] Rings);
-
-    /// <summary>Fewer and heavier rings as the icon gets smaller, so that each
-    /// stays more than a pixel wide.</summary>
-    private static Cut For(int size) => size switch
+    static AppIcon()
     {
-        >= 48 => new Cut(62, 11, [66, 101, 136]),
-        >= 20 => new Cut(66, 17, [70, 106]),
-        _ => new Cut(80, 26, [90]),
-    };
+        Plate.Freeze();
+        BackCard.Freeze();
+        FrontCard.Freeze();
+        OuterWave.Freeze();
+        InnerWave.Freeze();
+        Transfer.Freeze();
+        TrayMark.Freeze();
+    }
 
     /// <summary>The mark at `size` pixels, on its plate, or alone when `ground` is null.</summary>
     public static RenderTargetBitmap Draw(int size, Color mark, Color? ground)
     {
-        var cut = For(size);
-        var center = new Point(Grid / 2, Grid / 2);
-        var brush = new SolidColorBrush(mark);
         var visual = new DrawingVisual();
         using (var dc = visual.RenderOpen())
         {
             dc.PushTransform(new ScaleTransform(size / Grid, size / Grid));
-            // The plate cuts the widest ring, which shows only in its corners.
-            var plate = new RectangleGeometry(new Rect(8, 8, Grid - 16, Grid - 16), 54, 54);
             if (ground is { } fill)
             {
-                // Lit from above, like every raised thing in the window.
-                var lit = new LinearGradientBrush(Shade(fill, 1.1), Shade(fill, 0.9), 90);
-                dc.DrawGeometry(lit, null, plate);
+                var plateBrush = new LinearGradientBrush(Color.FromRgb(0xFF, 0xFC, 0xF6),
+                    Color.FromRgb(0xDA, 0xC9, 0xBA), new Point(0, 0), new Point(1, 1));
+                plateBrush.GradientStops.Insert(1, new GradientStop(fill, 0.5));
+                dc.DrawGeometry(plateBrush, new Pen(new SolidColorBrush(Color.FromRgb(0xD4, 0xC2, 0xB2)), 1.5), Plate);
             }
-            dc.PushClip(ground is null ? new RectangleGeometry(new Rect(0, 0, Grid, Grid)) : plate);
-            for (var ring = 0; ring < cut.Rings.Length; ring++)
+
+            dc.PushTransform(new RotateTransform(-10, Grid / 2, Grid / 2));
+            if (ground is null)
             {
-                dc.PushOpacity(Fade[ring]);
-                dc.DrawEllipse(null, new Pen(brush, cut.Stroke * Thin[ring]), center, cut.Rings[ring], cut.Rings[ring]);
-                dc.Pop();
+                dc.DrawGeometry(new SolidColorBrush(mark), null, TrayMark);
             }
-            dc.PushTransform(new RotateTransform(Turn, center.X, center.Y));
-            var tile = new Rect(center.X - cut.Tile / 2, center.Y - cut.Tile / 2, cut.Tile, cut.Tile);
-            dc.DrawRoundedRectangle(brush, null, tile, cut.Tile * 0.24, cut.Tile * 0.24);
-            dc.Pop();
+            else
+            {
+                var back = new LinearGradientBrush(Color.FromRgb(0xFF, 0xBC, 0x73), Color.FromRgb(0xCF, 0x59, 0x30), 90);
+                var front = new LinearGradientBrush(Color.FromRgb(0xEC, 0x78, 0x43), Color.FromRgb(0xAE, 0x37, 0x20), 90);
+                dc.DrawGeometry(back, new Pen(new SolidColorBrush(Color.FromArgb(78, 255, 247, 223)), 1.5), BackCard);
+                if (size >= 24)
+                    DrawWaves(dc, size);
+                if (size >= 48)
+                {
+                    dc.PushTransform(new TranslateTransform(0, 3));
+                    dc.DrawGeometry(new SolidColorBrush(Color.FromArgb(36, 117, 44, 21)), null, FrontCard);
+                    dc.Pop();
+                }
+                dc.DrawGeometry(front, new Pen(new SolidColorBrush(Color.FromArgb(80, 255, 207, 169)), 1.5), FrontCard);
+                dc.DrawGeometry(new SolidColorBrush(mark), null, Transfer);
+            }
             dc.Pop();
             dc.Pop();
         }
@@ -97,9 +106,17 @@ public static class AppIcon
         return bitmap;
     }
 
-    private static Color Shade(Color color, double by) => Color.FromRgb(
-        (byte)Math.Min(255, color.R * by + (by > 1 ? 14 : 0)), (byte)Math.Min(255, color.G * by),
-        (byte)Math.Min(255, color.B * by));
+    private static void DrawWaves(DrawingContext dc, int size)
+    {
+        var pen = new Pen(new SolidColorBrush(Color.FromRgb(0xFF, 0xF4, 0xDE)), size >= 48 ? 6 : 9)
+        {
+            StartLineCap = PenLineCap.Round,
+            EndLineCap = PenLineCap.Round,
+        };
+        dc.DrawGeometry(null, pen, OuterWave);
+        if (size >= 48)
+            dc.DrawGeometry(null, pen, InnerWave);
+    }
 
     /// <summary>For the notification area, which shows small marks in one color.</summary>
     public static System.Drawing.Icon ForTray(bool onDarkTaskbar)

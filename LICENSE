@@ -16,6 +16,10 @@ Component license guide (file-level notices and exceptions take precedence):
   winawdl/radio/radio_link.h is MIT.
 - winawdl/adapter: MIT AND BSD-3-Clause-Clear; see the adapter README,
   source file headers and the accompanying license notices.
+- crates/radio: MIT AND BSD-3-Clause-Clear; see its README, source file
+  headers and the accompanying license notices.
+- crates/radio/drivers/windows/mt7922: BSD-3-Clause-Clear; see its README and
+  crates/radio/LICENSE-mt7925.txt.
 - winawdl/upstream/owl/radiotap: ISC; see its COPYING file.
 
 Other third-party dependencies, firmware, runtime binaries, assets and

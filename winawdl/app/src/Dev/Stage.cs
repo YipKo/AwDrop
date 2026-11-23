@@ -755,11 +755,11 @@ public static class Stage
         {
             dc.DrawRectangle(light.Brush(light.Table), null, new Rect(0, 0, width, height));
             dc.DrawImage(AppIcon.Draw(256, Colors.White, AppIcon.Ground), new Rect(128, 192, 256, 256));
-            dc.DrawText(Line("winawdl", "Segoe UI Variable Display, Segoe UI", 116, FontWeights.SemiBold, light.Ink),
+            dc.DrawText(Line("AwDrop", "Segoe UI Variable Display, Segoe UI", 116, FontWeights.SemiBold, light.Ink),
                         new Point(440, 176));
-            dc.DrawText(Line("AirDrop and AWDL on Windows,", "Segoe UI Variable Text, Segoe UI", 40,
+            dc.DrawText(Line("Nearby file sharing", "Segoe UI Variable Text, Segoe UI", 40,
                              FontWeights.Normal, light.InkSoft), new Point(446, 326));
-            dc.DrawText(Line("through the built-in Wi-Fi card", "Segoe UI Variable Text, Segoe UI", 40,
+            dc.DrawText(Line("with AirDrop and AWDL", "Segoe UI Variable Text, Segoe UI", 40,
                              FontWeights.Normal, light.InkSoft), new Point(446, 378));
         }
         var picture = new RenderTargetBitmap((int)width, (int)height, 96, 96, PixelFormats.Pbgra32);

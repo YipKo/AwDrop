@@ -1,0 +1,5 @@
+AwDrop Desktop Preview
+
+This is a desktop interface preview. AirDrop discovery and file transfers are not connected or available. Hardware inventory is not a compatibility check.
+
+This installer does not install a driver or configure a network adapter.

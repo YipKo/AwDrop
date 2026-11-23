@@ -1,0 +1,9 @@
+[workspace]
+name = "awdrop-windows-driver-tools"
+channels = ["conda-forge"]
+platforms = ["win-64"]
+
+[dependencies]
+clang = ">=20,<22"
+lld = ">=20,<22"
+python = ">=3.12,<3.15"

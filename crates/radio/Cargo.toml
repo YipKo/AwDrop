@@ -1,0 +1,11 @@
+[package]
+name = "awdrop-radio"
+version = "0.1.0"
+edition = "2021"
+license = "MIT AND BSD-3-Clause-Clear"
+description = "Hardware-neutral adapter contract for winawdl's radio link"
+
+[dependencies]
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.59", features = ["Win32_Foundation", "Win32_System_Diagnostics_Etw", "Win32_System_Time"] }

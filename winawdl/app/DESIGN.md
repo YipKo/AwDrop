@@ -132,24 +132,15 @@ own thumbnail when Windows has one.
 
 ### The app's icon
 
-White rings spreading on blue, around a file turned the way the files in the
-window are: a file that has just landed. Rings on blue are what make it read
-as AirDrop at a glance, which is what was asked for. It is not Apple's mark,
-which is theirs alone: that one is open at the bottom around a wedge, this
-one is whole rings around a file.
+Two overlapping orange cards and a white arrow show a file passing between
+devices. Short radio waves on the sending card suggest nearby discovery. The
+48-pixel and larger icons show both waves, while the 24- to 40-pixel icons show
+one. The smallest icons keep the cards and arrow. The notification area uses
+a single-color silhouette with the arrow cut out.
 
-- The blue is `#0078D4`, the accent Windows ships with. It stays that blue
-  whatever the accent is, because an icon is pinned and found by its color.
-- The plate is a shade lighter at the top than at the bottom: lit from
-  above, like every raised thing in the window.
-- A ring fades and thins as it spreads, and the widest is cut by the plate.
-- Small sizes carry fewer, heavier rings (three from 48 pixels, two from 20,
-  one below), so that each stays more than a pixel wide.
-- The notification area gets the same mark in one color, white or black with
-  the taskbar, as Windows' own marks there are.
-
-The drawing is code, in `src/Shell/Chrome.cs`. After changing it, write the
-icon file again and rebuild:
+The Windows drawing is in `src/Shell/Chrome.cs`. The READMEs use the matching
+vector artwork in `docs/logo.svg` at the winawdl repository level. After a design
+change, update both drawings, regenerate the raster files, and rebuild:
 
 ```powershell
 .\build\app\winawdl\winawdl.exe --render icon app\winawdl.ico build\app\icon-preview.png

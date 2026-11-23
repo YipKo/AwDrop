@@ -1,0 +1,43 @@
+<Application
+    x:Class="AwDrop.Windows.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+            </ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="AwDropBackground" Color="#F3F2F0" />
+                    <SolidColorBrush x:Key="AwDropBackdropTint" Color="#77F3F2F0" />
+                    <AcrylicBrush x:Key="AwDropPane" TintColor="#F6F3EF" TintOpacity="0.40"
+                                  TintLuminosityOpacity="0.82" FallbackColor="#F6F3EF" />
+                    <SolidColorBrush x:Key="AwDropCard" Color="#FAFAF8" />
+                    <SolidColorBrush x:Key="AwDropWell" Color="#EBE8E4" />
+                    <SolidColorBrush x:Key="AwDropStroke" Color="#D9D5CF" />
+                    <SolidColorBrush x:Key="AwDropMuted" Color="#57534D" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="AwDropBackground" Color="#201F1E" />
+                    <SolidColorBrush x:Key="AwDropBackdropTint" Color="#88201F1E" />
+                    <AcrylicBrush x:Key="AwDropPane" TintColor="#2B2927" TintOpacity="0.52"
+                                  TintLuminosityOpacity="0.80" FallbackColor="#2B2927" />
+                    <SolidColorBrush x:Key="AwDropCard" Color="#2A2826" />
+                    <SolidColorBrush x:Key="AwDropWell" Color="#191816" />
+                    <SolidColorBrush x:Key="AwDropStroke" Color="#49443E" />
+                    <SolidColorBrush x:Key="AwDropMuted" Color="#C4BFB8" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="HighContrast">
+                    <SolidColorBrush x:Key="AwDropBackground" Color="{ThemeResource SystemColorWindowColor}" />
+                    <SolidColorBrush x:Key="AwDropBackdropTint" Color="{ThemeResource SystemColorWindowColor}" />
+                    <SolidColorBrush x:Key="AwDropPane" Color="{ThemeResource SystemColorWindowColor}" />
+                    <SolidColorBrush x:Key="AwDropCard" Color="{ThemeResource SystemColorWindowColor}" />
+                    <SolidColorBrush x:Key="AwDropWell" Color="{ThemeResource SystemColorWindowColor}" />
+                    <SolidColorBrush x:Key="AwDropStroke" Color="{ThemeResource SystemColorWindowTextColor}" />
+                    <SolidColorBrush x:Key="AwDropMuted" Color="{ThemeResource SystemColorWindowTextColor}" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

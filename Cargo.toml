@@ -1,0 +1,3 @@
+[workspace]
+members = ["desktop/bridge", "crates/radio"]
+resolver = "2"
