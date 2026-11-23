@@ -1,0 +1,8 @@
+[package]
+name = "winawdl-adapter"
+version = "0.1.0"
+edition = "2021"
+license = "MIT AND BSD-3-Clause-Clear"
+description = "Hardware-neutral adapter contract for winawdl's radio link"
+
+[dependencies]

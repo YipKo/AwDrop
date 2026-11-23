@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>winawdl</AssemblyName>
+    <RootNamespace>Winawdl</RootNamespace>
+    <Version>0.4.0</Version>
+    <!-- What is built says where its sources are from the repository down, not from the disk it was built on. -->
+    <PathMap>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..'))=.</PathMap>
+    <Product>winawdl</Product>
+    <Description>AirDrop and AWDL on Windows, through the built-in Wi-Fi card</Description>
+    <Copyright>Copyright (c) 2026 Raphaël Richaud. MIT License.</Copyright>
+    <RepositoryUrl>https://github.com/raph559/winawdl</RepositoryUrl>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <!-- Written by the app itself from the drawing in src\Shell\Chrome.cs: see app\DESIGN.md. -->
+    <ApplicationIcon>winawdl.ico</ApplicationIcon>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <EnableDefaultPageItems>false</EnableDefaultPageItems>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Windows Forms is here for the tray icon alone; its names stay out of the way. -->
+    <Using Remove="System.Windows.Forms" />
+    <Using Remove="System.Drawing" />
+    <Compile Include="src\**\*.cs" />
+    <Page Include="src\**\*.xaml" />
+    <EmbeddedResource Include="..\..\locales\*.json" LogicalName="winawdl.locales.%(Filename)%(Extension)" />
+  </ItemGroup>
+</Project>

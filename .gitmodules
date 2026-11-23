@@ -1,0 +1,6 @@
+[submodule "winawdl/upstream/devourer"]
+	path = winawdl/upstream/devourer
+	url = https://github.com/raph559/devourer.git
+[submodule "winawdl/upstream/owl"]
+	path = winawdl/upstream/owl
+	url = https://github.com/seemoo-lab/owl.git

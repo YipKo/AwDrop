@@ -1,0 +1,19 @@
+[workspace]
+name = "winawdl-adapter-dev"
+channels = ["conda-forge"]
+platforms = ["win-64"]
+
+[dependencies]
+rust = "1.99.1.*"
+rust-std-x86_64-pc-windows-gnu = "1.99.1.*"
+m2w64-gcc = "15.*"
+cmake = ">=3.25,<5"
+ninja = ">=1.11,<2"
+python = "3.12.*"
+
+[tasks]
+adapter-test = { cmd = "cargo test --manifest-path adapter/Cargo.toml --target x86_64-pc-windows-gnu" }
+adapter-mock = { cmd = "cargo build --manifest-path adapter/Cargo.toml --example mock_radio --target x86_64-pc-windows-gnu" }
+python-check = { cmd = "python --version" }
+awdl-configure = { cmd = "cmake -S awdl -B build/awdl -G Ninja -DCMAKE_C_COMPILER=x86_64-w64-mingw32-gcc -DCMAKE_BUILD_TYPE=Release" }
+awdl-build = { cmd = "cmake --build build/awdl", depends-on = ["awdl-configure"] }

@@ -1,0 +1,23 @@
+AwDrop is a collection of separately licensed components.
+
+Original AwDrop contributions are available under the MIT License in
+LICENSE-MIT, unless a file or directory states otherwise or the contribution
+is derived from code subject to another license. Upstream authors retain their
+copyright and their notices and license terms continue to apply.
+
+Component license guide (file-level notices and exceptions take precedence):
+
+- winawdl: MIT, except components listed below; see winawdl/LICENSE.
+- winawdl/airdrop: MIT; see winawdl/airdrop/LICENSE.
+- winawdl/awdl and winawdl/upstream/owl: GPL-3.0-or-later, with
+  separately marked exceptions; see their license files.
+- winawdl/radio and winawdl/upstream/devourer: GPL-2.0-only, with
+  separately marked exceptions; see their license files. In particular,
+  winawdl/radio/radio_link.h is MIT.
+- winawdl/adapter: MIT AND BSD-3-Clause-Clear; see the adapter README,
+  source file headers and the accompanying license notices.
+- winawdl/upstream/owl/radiotap: ISC; see its COPYING file.
+
+Other third-party dependencies, firmware, runtime binaries, assets and
+trademarks retain their own terms. This guide does not replace their licenses
+or grant rights to third-party trademarks or assets.
